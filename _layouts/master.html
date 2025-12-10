@@ -1,0 +1,208 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if site.browserTitle %}{{site.browserTitle}}{% else %}{% if page.breadcrumb %}{{ page.breadcrumb }} |{% endif %}{{site.title}} | NSW Government{% endif %}</title>
+  <meta name="robots" content="noindex" />
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="icon" href="{{site.baseurl}}/assets/favicons/favicon.ico">
+  <link type="text/css" rel="stylesheet" href="{{site.baseurl}}/assets/css/main.css">
+  <link type="text/css" rel="stylesheet" href="{{site.baseurl}}/local/css/additional.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
+  <script>
+    // SVG Sprite Loader
+    var svgAjax = new XMLHttpRequest();
+    svgAjax.open("GET", "{{site.baseurl}}/assets/svg/sprite.svg", true);
+    svgAjax.send();
+    svgAjax.onload = function(e) {
+      var fragment = document.createRange().createContextualFragment(svgAjax.responseText);
+      var svg = fragment.querySelector('svg')
+      svg.setAttribute('aria-hidden', true);
+      svg.style.cssText = 'position: absolute; width: 0; height: 0; overflow: hidden;'
+      document.body.insertBefore(fragment, document.body.childNodes[0]);
+    };
+    // Replace 'no-js' with 'js' on the html tag
+    (function(e){e.className=e.className.replace(/\bno-js\b/,'js')})(document.documentElement);
+  </script>
+</head>
+
+<body>
+  <nav class="nsw-skipto nsw-container" aria-label="Skip to links">
+  <a class="nsw-skipto__link" href="#nav"><span>Skip to navigation</span></a>
+  <a class="nsw-skipto__link" href="#content"><span>Skip to content</span></a>
+</nav>
+<div class="nsw-masthead">
+  <div class="nsw-container">
+    <p>A NSW Government website</p>
+  </div>
+</div>
+<header class="nsw-header">
+  <div class="nsw-header__container">
+    <div class="nsw-header__wrapper">
+      <div class="nsw-header__center">
+        <a href="#" class="nsw-header__logo-link">
+          <svg class="nsw-icon nsw-header__logo" focusable="false" aria-hidden="true">
+            <use xlink:href="#logo"></use>
+          </svg>
+          <span class="sr-only">{{ site.title }}</span>
+        </a>
+<!--         {% if site.stage %}<span class="header__badge">{{site.stage}}</span>{% endif %} -->
+      </div>
+      <div class="nsw-header__left">
+        <button type="button" class="nsw-header-btn nsw-header-btn--menu js-open-navigation" aria-expanded="false"
+          aria-controls="main-navigation">
+          <svg class="nsw-icon nsw-header-btn__icon" focusable="false" aria-hidden="true">
+            <use xlink:href="#menu"></use>
+          </svg>
+          <span class="nsw-header-btn__sub"><span class="sr-only">Open</span> Menu</span>
+        </button>
+      </div>
+      <div class="nsw-header__right">
+        <button type="button" class="nsw-header-btn nsw-header-btn--search js-open-search" aria-expanded="false"
+          aria-controls="header-search">
+          <svg class="nsw-icon nsw-header-btn__icon" focusable="false" aria-hidden="true">
+            <use xlink:href="#search"></use>
+          </svg>
+          <span class="nsw-header-btn__sub"><span class="sr-only">Show</span> Search</span>
+        </button>
+      </div>
+    </div>
+    <div class="nsw-search">
+      <div id="header-search" class="nsw-search__area js-search-area" hidden>
+        <form role="search">
+          <label for="nsw-search__input" class="sr-only">Search site for:</label>
+          <input autocomplete="off" class="nsw-search__input js-search-input" id="nsw-search__input"
+            name="input-autocomplete" type="text">
+          <svg class="nsw-icon nsw-search__search-icon" focusable="false" aria-hidden="true">
+            <use xlink:href="#search"></use>
+          </svg>
+        </form>
+        <button class="nsw-search__close-btn js-close-search" aria-expanded="true" aria-controls="header-search">
+          <svg class="nsw-icon nsw-search__close-icon" focusable="false" aria-hidden="true">
+            <use xlink:href="#close"></use>
+          </svg>
+          <span class="sr-only">Close search</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% if site.data.navs.mainnav[0] %}
+<nav id="main-navigation" class="nsw-navigation" aria-label="Main menu">
+  <div class="nsw-navigation__header">
+    <h2 id="nsw-navigation">Menu</h2>
+    <button type="button" class="nsw-navigation__close js-close-navigation" aria-expanded="true">
+      <svg class="nsw-icon icon" focusable="false" aria-hidden="true">
+        <use xlink:href="#close"></use>
+      </svg>
+      <span class="sr-only">Close Menu</span>
+    </button>
+  </div>
+  <ul class="nsw-navigation__list">
+  	{% for item in site.data.navs.mainnav[0].items %}
+      <li class="nsw-navigation__list-item">
+        <a href="{{ site.baseurl }}{{ item.url }}" class="nsw-navigation__link">
+          <span class="nsw-navigation__link-text">{{ item.page }}</span>
+        </a>
+      </li>
+    {% endfor %}
+ </ul>
+</nav>
+{% endif %}
+
+{{ content }}
+
+<footer class="nsw-footer">
+  <div class="nsw-footer__upper">
+    <div class="nsw-container section-links">
+        <div class="section-links__group">
+          <h3 class="section-links__heading"><a href="#">Section Link</a></h3>
+          <ul class="section-links__list">
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+          </ul>
+        </div>
+        <div class="section-links__group">
+          <h3 class="section-links__heading"><a href="#">Section Link</a></h3>
+          <ul class="section-links__list">
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+          </ul>
+        </div>
+        <div class="section-links__group">
+          <h3 class="section-links__heading"><a href="#">Section Link</a></h3>
+          <ul class="section-links__list">
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+          </ul>
+        </div>
+        <div class="section-links__group">
+          <h3 class="section-links__heading"><a href="#">Section Link</a></h3>
+          <ul class="section-links__list">
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+              <li class="section-links__item"><a href="#">Highlight link</a></li>
+          </ul>
+        </div>
+    </div>
+  </div>
+  <div class="nsw-footer__lower">
+    <div class="nsw-container">
+      <p>We pay respect to the Traditional Custodians and First Peoples of NSW, and acknowledge their continued connection to their country and culture.</p>
+      <hr>
+	  {% if site.data.navs.tertiarynav[0] %}
+	  <ul class="nsw-footer-links">
+	    {% for item in site.data.navs.tertiarynav[0].items %}
+          <li class="nsw-footer-links__item">
+            <a href="{{ site.baseurl }}{{ item.url }}" class="nsw-footer-links__link">{{ item.page }}</a>
+          </li>
+	    {% endfor %}
+      </ul>
+	  {% endif %}
+      <div class="nsw-footer__info">
+        <p class="nsw-footer__copyright">© NSW Government. Licensed under the <a href="https://www.customerservice.nsw.gov.au/copyright" rel="external">Creative Commons Attribution 4.0 licence</a></p>
+        <!-- <p class="nsw-footer__built">Built by <a href="https://www.digital.nsw.gov.au/digital-design-system" target="_blank" rel="noopener noreferrer">NSW Design System</a></p> -->
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <script src="{{ site.baseurl }}/assets/js/main.js"></script>
+  <script>window.NSW.initSite()</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- MAIN BODY -->
+
+<!-- END MAIN BODY -->
+<!--FOOTER -->
